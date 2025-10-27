@@ -1,0 +1,1 @@
+Example firewall rules and VLAN segmentation plan.
