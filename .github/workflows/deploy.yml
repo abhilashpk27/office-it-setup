@@ -1,0 +1,33 @@
+name: Deploy Git Workflow Page
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Git
+      run: |
+        git config --global user.name "Abhilash P K"
+        git config --global user.email "abhilashpk63@gmail.com"
+
+    - name: Commit any new changes
+      run: |
+        git add .
+        git commit -m "Auto-commit updates" || echo "No changes to commit"
+
+    - name: Push changes
+      run: git push origin main
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v6
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
